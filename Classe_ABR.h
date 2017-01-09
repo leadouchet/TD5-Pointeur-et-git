@@ -1,6 +1,7 @@
 
 class ABR {
 protected :
+  int valeur_;
   int* cle_;
   ABR* fg_;
   ABR* fd_;
@@ -12,11 +13,11 @@ public:
   ABR* fd();
 
   // Setters
-  void set_cle()
+  void set_cle(int a);
 
   // Constructors
   ABR();
-  ABR(int cle);
+  ABR(int a);
   ABR(const ABR& model);
 
   //destructors
@@ -25,4 +26,5 @@ public:
   //methodes
 bool validation();
   
-ABR recherche(int nb);  
+ABR recherche(int nb, ABR racine);  
+};
