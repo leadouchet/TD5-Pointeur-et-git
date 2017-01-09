@@ -20,3 +20,16 @@ ABR::ABR(){
   int** fg_=nullptr;
   int** fd_=nullptr;
 }
+
+//getters
+int* ABR::cle(){
+	return cle_;
+}
+
+int** ABR::fg(){
+	return fg_;
+}
+
+int** ABR::fd(){
+	return fd_;
+}
