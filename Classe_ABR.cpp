@@ -36,15 +36,23 @@ ABR::set_cle(int a){
 	cle_ = &a;
 }
 // Methodes :
- ABR::validation(){
- 	if (fg_ == nullptr && fd_ == nullptr && cle_ == nullptr){
+ABR::validation(){
+ 	if (fg_ == nullptr && fd_ == nullptr){
  		return false;
  	}
- 	else {return true};
+ 	else {return true;}
  }
 
 ABR::recherche(int nb, ABR racine){
-	if (*racine.cle_ == nb){
-		return racine
+	//retourne un arbre vide 
+	if (racine.validation() == false){
+		return ABR();
+	}
+	if (*racine.cle() == nb){return racine;}
+	else{
+		if (*racine.cle() < nb){
+			recherche(nb,*racine.fd());
+		}
+		else {recherche(nb,*racine.fg());}
 	}
 }
