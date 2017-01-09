@@ -15,8 +15,7 @@ ABR::ABR(const ABR& model){
 
 //Constructeur par defaut
 ABR::ABR(){
-  int* cle_;
-  *cle_ =0;
+  int* cle_=nullptr;
   int** fg_=nullptr;
   int** fd_=nullptr;
 }
@@ -32,10 +31,14 @@ int** ABR::fg(){
 int** ABR::fd(){
 	return fd_;
 }
+//Setter 
+ABR::set_cle(int a){
+	cle_ = &a;
+}
 // Methodes :
  ABR::validation(){
- 	if (fg_ == nullptr && fd_ == nullptr){
- 		return false
+ 	if (fg_ == nullptr && fd_ == nullptr && cle_ == nullptr){
+ 		return false;
  	}
- 	else {return true}
+ 	else {return true};
  }
