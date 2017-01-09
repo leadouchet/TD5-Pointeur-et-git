@@ -1,3 +1,4 @@
+
 class ABR {
 protected :
   int* cle_;
@@ -11,6 +12,7 @@ public:
   ABR fd();
 
   // Setters
+  void cle
 
   // Constructors
   ABR();
@@ -20,6 +22,7 @@ public:
   //destructors
 
 
-  
+  //methodes
+bool validation();
   
   
