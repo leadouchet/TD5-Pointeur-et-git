@@ -9,26 +9,26 @@ ABR::ABR(int cle){
 
 ABR::ABR(const ABR& model){
 	int* cle_ = model.cle_
-	int** fg_ = model.fg_ 
-	int** fd_ = model.fd_
+	ABR* fg_ = model.fg_ 
+	ABR* fd_ = model.fd_
 }
 
 //Constructeur par defaut
 ABR::ABR(){
   int* cle_=nullptr;
-  int** fg_=nullptr;
-  int** fd_=nullptr;
+  ABR* fg_=nullptr;
+  ABR* fd_=nullptr;
 }
 
 //getters
 int* ABR::cle(){
 	return cle_;
 }
-int** ABR::fg(){
+ABR* ABR::fg(){
 	return fg_;
 }
 
-int** ABR::fd(){
+ABR* ABR::fd(){
 	return fd_;
 }
 //Setter 
@@ -42,3 +42,9 @@ ABR::set_cle(int a){
  	}
  	else {return true};
  }
+
+ABR::recherche(int nb, ABR racine){
+	if (*racine.cle_ == nb){
+		return racine
+	}
+}

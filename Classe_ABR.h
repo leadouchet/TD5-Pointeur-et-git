@@ -2,14 +2,14 @@
 class ABR {
 protected :
   int* cle_;
-  int** fg_;
-  int** fd_;
+  ABR* fg_;
+  ABR* fd_;
 
 public:
   // Getters
   int* cle();
-  int** fg();
-  int** fd();
+  ABR* fg();
+  ABR* fd();
 
   // Setters
   void set_cle()
