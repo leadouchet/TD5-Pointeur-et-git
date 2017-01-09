@@ -25,4 +25,4 @@ public:
   //methodes
 bool validation();
   
-  
+ABR recherche(int nb);  
