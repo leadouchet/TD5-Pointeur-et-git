@@ -6,9 +6,9 @@ protected :
 
 public:
   // Getters
-  int cle();
-  ABR fg();
-  ABR fd();
+  int* cle();
+  int** fg();
+  int** fd();
 
   // Setters
 
