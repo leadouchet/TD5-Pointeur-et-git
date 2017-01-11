@@ -84,7 +84,14 @@ void ABR::insertion(int a){
 
 void ABR::min(){
 	if (this->fg_ == nullptr){
-		printf("Le min de cet arbre est : %d \n" %*this->cle_);
+		printf("Le min de cet arbre est : %d \n" , *this->cle_);
 	}
 	else{ this->fg_->min();}
+}
+
+void ABR::max(){
+	if (this->fd_ == nullptr){
+		printf("Le min de cet arbre est : %d \n" , *this->cle_);
+	}
+	else{ this->fd_->max();}
 }
