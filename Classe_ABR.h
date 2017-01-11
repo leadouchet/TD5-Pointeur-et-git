@@ -17,6 +17,7 @@ public:
 bool vide();
 void insertion(int a);
 ABR* recherche(int nb);
- void parcours();  
+void parcours();  
+void min();
+void max();
 };
-

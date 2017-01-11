@@ -96,5 +96,19 @@ void ABR::parcours(){
   if (this->fd_ != nullptr){
     fd_->parcours();
  }
+}
+int ABR::min(){
+	if (this->fg_ == nullptr){
+		printf("Le min de cet arbre est : %d \n" , *this->cle_);
+		return *this->cle_;
+	}
+	else{ return this->fg_->min();}
+}
 
+int ABR::max(){
+	if (this->fd_ == nullptr){
+		printf("Le min de cet arbre est : %d \n" , *this->cle_);
+		return *this->cle_;
+	}
+	else{ return this->fd_->max();}
 }

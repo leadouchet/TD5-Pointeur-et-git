@@ -9,5 +9,8 @@ int main(){
     racine->insertion(a[i]);
 }
   racine->parcours();
+  int b = racine->min();
+  int c = racine->max();
   delete racine;
+  
 }
