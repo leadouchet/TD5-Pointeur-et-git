@@ -11,11 +11,14 @@ public:
   ABR();
 
   //destructors
-  void supress(int a);
+
 
   //methodes
+void supress(int a);
+void supressfeuille(ABR* feuille, ABR* parent)
 
 bool vide();
   
-ABR recherche(int nb, ABR racine);  
+ABR* recherche(int nb, ABR racine);  
+ABR* rechercheparent(int nb)
 };
