@@ -17,16 +17,38 @@ bool ABR::vide(){
  	else {return false;}
  }
 
-ABR ABR::recherche(int nb, ABR racine){
-	//retourne un arbre vide 
-	if (racine.validation() == false){
-		return ABR(10);
-	}
-	if (*racine.cle() == nb){return racine;}
-	else{
-		if (*racine.cle() < nb){
-			recherche(nb,*racine.fd());
+ABR* ABR::recherche(int nb){
+	//retourne un ABR vide si l'ABR est vide
+	if (this->vide() == true){
+		// L'ABR est vide
+		return this;
 		}
-		else {recherche(nb,*racine.fg());}
+	//renvoie le noeud (sous ABR) qui contient cette cle	
+	if (*this->cle_ == nb){
+		// La cle recherchee est dans ce noeud
+		return this;
+		}
+		
+	else{
+		// on regarde de quel coté doit se trouver la clé
+		if (*this->cle_ < nb){
+			if (this->fd_ != nullptr){
+				// on regarde si le fils droit existe
+				return recherche(nb,*this->fd_);
+			}
+			else{
+				return this;
+			}
+		}
+		
+		else if (*this->cle_ > nb){
+			if (this->fg_ != nullptr){
+				// on regarde si le fils gauche existe
+				return recherche(nb,*this->fg_);
+			}
+			else{
+				return this;
+			}
+		}
 	}
 }
