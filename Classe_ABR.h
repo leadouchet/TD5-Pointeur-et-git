@@ -15,6 +15,6 @@ public:
 
   //methodes
 bool vide();
-  
+void insertion(int a, ABR racine);
 ABR recherche(int nb, ABR racine);  
 };
