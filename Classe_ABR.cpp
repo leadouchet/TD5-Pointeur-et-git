@@ -1,5 +1,5 @@
 #include "Classe_ABR.h"
- 
+ #include <stdio.h>
 
 //Constructeur par defaut
 ABR::ABR(){
@@ -80,3 +80,11 @@ void ABR::insertion(int a){
 
 
   }}
+
+
+void ABR::min(){
+	if (this->fg_ == nullptr){
+		printf("Le min de cet arbre est : %d \n" %*this->cle_);
+	}
+	else{ this->fg_->min();}
+}

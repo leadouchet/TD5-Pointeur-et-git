@@ -17,4 +17,5 @@ public:
 bool vide();
 void insertion(int a);
 ABR* recherche(int nb);  
+void min();
 };
