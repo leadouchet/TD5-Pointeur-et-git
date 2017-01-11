@@ -17,6 +17,8 @@ ABR::~ABR(){
 
 
 // Methodes :
+
+//Un arbre est vide si sa cle_ est un pointeur null
 bool ABR::vide(){
  	if (cle_== nullptr){
  		return true;
@@ -63,9 +65,9 @@ ABR* ABR::recherche(int nb){
 
 void ABR::insertion(int a){
   ABR* parent = this->recherche (a);
-  if (parent->vide()==true){
+  if (parent->vide()==true){ //revient a ecrire *parent.vide()
     parent->cle_= new int ;
-    *(parent->cle_) = a;
+    *(parent->cle_) = a; //la valeur du parent pointee par le cle
     return;
   }
 
@@ -113,6 +115,7 @@ int ABR::max(){
 	else{ return this->fd_->max();}
 }
 
+// cette fonction sert a remonter dans l arbre pour trouver le parent d une valeur
 ABR* ABR::rechercheparent(int nb){
 	//retourne un ABR vide si l'ABR est vide
 	if (this->vide() == true){
@@ -150,22 +153,28 @@ ABR* ABR::rechercheparent(int nb){
 		}
 	}
 }
+
+// Cette fonction sert a supprimer un noeud et rearranger ses fils
 void ABR::supress(int a){ //Ne coupe la racine
 	ABR* noeud =this->recherche(a);
 	ABR* parent = this->rechercheparent(a);
+
+	//Si le noeud n as pas de fils alors c est une feuille 
 	if (noeud->fg_ == nullptr && noeud->fd_ == nullptr){
 		this->supressfeuille(noeud, parent);
 	}
+	// Si le noeud n a qu un fils droit, on doit le remplacer par son fils
 	else if(noeud->fg_ == nullptr){
-		if (*parent->fg_->cle_== *noeud->cle_){
-			parent->fg_ = noeud-> fd_;
+		if (*parent->fg_->cle_== *noeud->cle_){ // On regarde si le noeud est le fils droit ou le fils gauche du parent
+			parent->fg_ = noeud-> fd_; // la valeur qui point vers le fils gauche du parent va maintenant pointer vers le
+			// fils droit du noeud que l'on veut supprimer
 		}
 		else {
 			parent-> fd_ = noeud-> fd_;
 		}	
-		delete noeud;
+		delete noeud; // On devrait pas faire delete *noeud ?? puisque noeud pointe vers un ABR
 	}
-	else if(noeud->fd_ == nullptr){
+	else if(noeud->fd_ == nullptr){ //meme chose si le noeud est un fils gauche
 		if (*parent->fg_->cle_== *noeud->cle_){
 			parent->fg_ = noeud-> fg_;
 		}
@@ -174,23 +183,31 @@ void ABR::supress(int a){ //Ne coupe la racine
 		}	
 		delete noeud;
 	}
+	// Lorsque le noeud possede des fils on cherche la valeur maximale des feuilles gauches et la valeur minimale des feuilles droites
 	else {
-		int Grand = noeud->fg_->max();
+		int Grand = noeud->fg_->max(); // *noeud->fg_->max() ??
 		int Petit = noeud->fd_->min();
-		if (*noeud->cle_ - Grand > Petit-*noeud->cle_){
+
+		if (*noeud->cle_ - Grand > Petit-*noeud->cle_){ //compare quel feuille est plus proche de la valeur du noeud 
+			//On echange cette feuille avec le noeud
 			ABR* replace = this->recherche(Petit);
 			ABR* parentreplace = this->rechercheparent(Petit);
 			replace->fg_= noeud->fg_;
 			replace ->fd_=noeud->fd_;
+
+			// 
 			if (*parent->fg_->cle_== *noeud->cle_){
-				parent->fg_ = replace;
+				parent->fg_ = replace; //On remplace le fils chez le parent
 			}
 			else {
 				parent-> fd_ = replace;
 			}
-			noeud->fg_=nullptr;
-			noeud->fd_=nullptr;
-			this->supressfeuille(noeud,parentreplace);
+			// on supprime le pointeur fils gauche du parent de la feuille qui a relplace le noeud
+			parentreplace->fg_=nullptr
+			//noeud->fg_=nullptr;
+			//noeud->fd_=nullptr;
+			delete *noeud
+			//this->supressfeuille(noeud,parentreplace);        //le noeud n a plus de parents
 		}	
 		else {
 			ABR* replace = this->recherche(Grand);
@@ -203,19 +220,25 @@ void ABR::supress(int a){ //Ne coupe la racine
 			else {
 				parent-> fd_ = replace;
 			}
-			noeud->fg_=nullptr;
-			noeud->fd_=nullptr;
-			this->supressfeuille(noeud,parentreplace);
+			parentreplace->fd_=nullptr
+			//noeud->fg_=nullptr;
+			//noeud->fd_=nullptr;
+			delete *noeud
+			//noeud->fg_=nullptr;
+			//noeud->fd_=nullptr;
+			//this->supressfeuille(noeud,parentreplace);
 		}
 	}
 }
 
+
+// Cette fonction permet de supprimer une feuille en changeant son parents
 void ABR::supressfeuille(ABR* feuille, ABR* parent){
-	if (*parent-> fg_->cle_ == *feuille->cle_){ 
+	if (*parent-> fg_->cle_ == *feuille->cle_){ // on cherche si cest un fils droit ou un fils gauche
 		parent->fg_ = nullptr;
 	}
 	else {
 		parent ->fd_ = nullptr;
 	}
-	delete feuille;
+	delete feuille; //*feuille ??
 }
