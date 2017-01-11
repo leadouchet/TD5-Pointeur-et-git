@@ -3,8 +3,11 @@
 
 
 int main(){
-  int a = 2;
-  ABR arbre = ABR(a);
-  ABR newa = arbre.recherche(2,arbre);
-  printf("%d\n",*newa.cle());
+  int a[11] = {10,8,6,9,5,7,15,11,17,13,16};
+  ABR* racine = new ABR();
+  for (int i=0;i<11;i++){
+    racine->insertion(a[i]);
+}
+  racine->parcours();
+  delete racine;
 }

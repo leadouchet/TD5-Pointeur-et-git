@@ -11,10 +11,12 @@ public:
   ABR();
 
   //destructors
-
-
+  
+  ~ABR();
   //methodes
 bool vide();
 void insertion(int a);
-ABR* recherche(int nb);  
+ABR* recherche(int nb);
+ void parcours();  
 };
+

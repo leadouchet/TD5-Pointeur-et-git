@@ -1,4 +1,5 @@
 #include "Classe_ABR.h"
+#include <stdio.h>
  
 
 //Constructeur par defaut
@@ -6,6 +7,12 @@ ABR::ABR(){
   cle_=nullptr;
   fg_=nullptr;
   fd_=nullptr;
+}
+
+ABR::~ABR(){
+  delete fd_;
+  delete fg_;
+  delete cle_;
 }
 
 
@@ -34,7 +41,7 @@ ABR* ABR::recherche(int nb){
 		if (*this->cle_ < nb){
 			if (this->fd_ != nullptr){
 				// on regarde si le fils droit existe
-				return recherche(nb,*this->fd_);
+				return this->fd_->recherche(nb);
 			}
 			else{
 				return this;
@@ -44,7 +51,7 @@ ABR* ABR::recherche(int nb){
 		else if (*this->cle_ > nb){
 			if (this->fg_ != nullptr){
 				// on regarde si le fils gauche existe
-				return recherche(nb,*this->fg_);
+				return this->fg_->recherche(nb);
 			}
 			else{
 				return this;
@@ -59,6 +66,7 @@ void ABR::insertion(int a){
   if (parent->vide()==true){
     parent->cle_= new int ;
     *(parent->cle_) = a;
+    return;
   }
 
   //pas indispensable mais cool pour comprendre 
@@ -67,7 +75,7 @@ void ABR::insertion(int a){
     return;
   else if (*parent->cle_ != a){
     
-    if (*racine->cle_ < a){
+    if (*parent->cle_ > a){
       
       parent->fg_ = new ABR();
       parent->fg_->cle_ = new int(a);
@@ -75,8 +83,18 @@ void ABR::insertion(int a){
 
     else {
       parent->fd_ = new ABR();
-      parent->fd_->cle_ = new int(a); 
+      parent->fd_->cle_ = new int(a);
     }
 
-
   }}
+
+void ABR::parcours(){
+  if (this->fg_ != nullptr){
+    fg_->parcours();
+  }
+  printf("%d\n",*this->cle_);
+  if (this->fd_ != nullptr){
+    fd_->parcours();
+ }
+
+}
