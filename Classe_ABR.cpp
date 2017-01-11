@@ -133,7 +133,7 @@ ABR* ABR::rechercheparent(int nb){
 		if (*this->cle_ < nb){
 			if (this->fd_ != nullptr){
 				// on regarde si le fils droit existe
-				return recherche(nb,*this->fd_);
+				return this->fd_->recherche(nb);
 			}
 			else{
 				return this;
@@ -142,7 +142,7 @@ ABR* ABR::rechercheparent(int nb){
 		else if (*this->cle_ > nb){
 			if (this->fg_ != nullptr){
 				// on regarde si le fils gauche existe
-				return recherche(nb,*this->fg_);
+				return this->fg_->recherche(nb);
 			}
 			else{
 				return this;
@@ -150,11 +150,11 @@ ABR* ABR::rechercheparent(int nb){
 		}
 	}
 }
-void supress(int a){ //Ne coupe la racine
-	ABR* noeud = recherche(a);
-	ABR* parent = rechercheparent(a);
+void ABR::supress(int a){ //Ne coupe la racine
+	ABR* noeud =this->recherche(a);
+	ABR* parent = this->rechercheparent(a);
 	if (noeud->fg_ == nullptr && noeud->fd_ == nullptr){
-		supressfeuille(noeud, parent);
+		this->supressfeuille(noeud, parent);
 	}
 	else if(noeud->fg_ == nullptr){
 		if (*parent->fg_->cle_== *noeud->cle_){
@@ -175,13 +175,13 @@ void supress(int a){ //Ne coupe la racine
 		delete noeud;
 	}
 	else {
-		int Grand = max(noeud->fg);
-		int Petit = min(noeud->fd);
+		int Grand = noeud->fg_->max();
+		int Petit = noeud->fd_->min();
 		if (*noeud->cle_ - Grand > Petit-*noeud->cle_){
-			ABR* replace = recherche(Petit);
-			ABR* parentreplace = rechercheparent(Petit);
-			replace->fg_= noeud->fg_
-			replace ->fd_=noeud->fd_
+			ABR* replace = this->recherche(Petit);
+			ABR* parentreplace = this->rechercheparent(Petit);
+			replace->fg_= noeud->fg_;
+			replace ->fd_=noeud->fd_;
 			if (*parent->fg_->cle_== *noeud->cle_){
 				parent->fg_ = replace;
 			}
@@ -190,13 +190,13 @@ void supress(int a){ //Ne coupe la racine
 			}
 			noeud->fg_=nullptr;
 			noeud->fd_=nullptr;
-			supressfeuille(noeud,parentreplace);
+			this->supressfeuille(noeud,parentreplace);
 		}	
 		else {
-			ABR* replace = recherche(Grand);
-			ABR* parentreplace = rechercheparent(Grand);
-			replace->fg_= noeud->fg_
-			replace ->fd_=noeud->fd_
+			ABR* replace = this->recherche(Grand);
+			ABR* parentreplace = this->rechercheparent(Grand);
+			replace->fg_= noeud->fg_;
+			replace ->fd_=noeud->fd_;
 			if (*parent->fg_->cle_== *noeud->cle_){
 				parent->fg_ = replace;
 			}
@@ -205,13 +205,13 @@ void supress(int a){ //Ne coupe la racine
 			}
 			noeud->fg_=nullptr;
 			noeud->fd_=nullptr;
-			supressfeuille(noeud,parentreplace);
+			this->supressfeuille(noeud,parentreplace);
 		}
 	}
 }
 
-void supressfeuille(ABR* feuille, ABR* parent){
-	if (*parent-> fg_->cle_ == *feuille->cle){ 
+void ABR::supressfeuille(ABR* feuille, ABR* parent){
+	if (*parent-> fg_->cle_ == *feuille->cle_){ 
 		parent->fg_ = nullptr;
 	}
 	else {

@@ -11,6 +11,10 @@ int main(){
   racine->parcours();
   int b = racine->min();
   int c = racine->max();
+  racine->supress(7);
+  racine->parcours();
+  
   delete racine;
+
   
 }
