@@ -15,7 +15,7 @@ public:
   ~ABR();
   //methodes
 void supress(int a);
- void supressfeuille(ABR* feuille, ABR* parent);
+void supressfeuille(ABR* feuille, ABR* parent);
 
 bool vide();
   

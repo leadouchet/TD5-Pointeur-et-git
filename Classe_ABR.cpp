@@ -1,4 +1,4 @@
-#include "Classe_ABR.hpp"
+#include "Classe_ABR.h"
 #include <stdio.h>
 
 
@@ -9,6 +9,7 @@ ABR::ABR(){
     fd_=nullptr;
 }
 
+//destructeur
 ABR::~ABR(){
     delete fd_;
     delete fg_;
@@ -156,7 +157,7 @@ ABR* ABR::rechercheparent(int nb){
 }
 
 // Cette fonction sert a supprimer un noeud et rearranger ses fils
-void ABR::supress(int a){ //Ne coupe la racine
+void ABR::supress(int a){ //Ne coupe pas la racine
     ABR* noeud =this->recherche(a);
     ABR* parent = this->rechercheparent(a);
     
@@ -245,5 +246,5 @@ void ABR::supressfeuille(ABR* feuille, ABR* parent){
     else {
         parent ->fd_ = nullptr;
     }
-    delete feuille; //*feuille ??
+    delete feuille; 
 }
